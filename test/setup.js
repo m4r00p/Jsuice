@@ -56,7 +56,7 @@ app.ParentClass.prototype = {
     __a: null,
     __b: null,
 
-    eveluate: function () {
+    evaluate: function () {
         return this.__a.evaluate() + this.__b.evaluate();
     }
 };
@@ -76,7 +76,7 @@ app.DependencyB.prototype = {
     __c: null,
 
     evaluate: function () {
-        return 1 + this.__c.evaluate();
+        return 1 + this.__c.evaluate(); //2
     }
 };
 
@@ -87,6 +87,13 @@ app.b.DependencyC.prototype = {
 
     evaluate: function () {
         return 1;
+    }
+};
+
+app.DependencyAImpl = function () {};
+app.DependencyAImpl.prototype = {
+    evaluate: function () {
+        return 4;
     }
 };
 

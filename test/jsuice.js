@@ -26,6 +26,39 @@ TestCase("JsuiceTestCase", {
     testNamespaceDependenties: function () {
         var klass = new Jsuice(global).getInjector().getInstance(app.ParentClass);
 
-        assertSame(3, klass.eveluate());
+        assertSame(3, klass.evaluate());
+    },
+
+    testModuleNameBinding: function () {
+        var MyModule = function () {
+            arguments.callee.prototype.uper.apply(this, arguments);
+        };
+
+        Jsuice.inherits(MyModule, Jsuice.Module);
+
+        MyModule.prototype.configure = function () {
+            this.bind("Klassname").to("BoundedKlassname");
+        };
+
+        var module = new MyModule();
+
+        assertTrue("Text map bounding", module.boundTo("Klassname") === "BoundedKlassname");
+    },
+
+    testCreatingModule: function () {
+        var MyModule = function () {
+            arguments.callee.prototype.uper.apply(this, arguments);
+        };
+
+        Jsuice.inherits(MyModule, Jsuice.Module);
+
+        MyModule.prototype.configure = function () {
+            this.bind("app.DependencyA").to("app.DependencyAImpl");
+        };
+
+        var klass = new Jsuice(global).getInjector(
+            new MyModule()).getInstance(app.ParentClass);
+
+        assertSame(6, klass.evaluate());
     }
 });
