@@ -9,7 +9,6 @@ DependencyA.prototype = {
 };
 
 var DependencyB = function (/* @Inject DependencyC */ c) {
-
     this.__c = c;
 };
 DependencyB.prototype = {
@@ -61,6 +60,10 @@ app.ParentClass.prototype = {
     }
 };
 
+/**
+ * Some interface
+ * @interface
+ */
 app.DependencyA = function () {};
 app.DependencyA.prototype = {
     evaluate: function () {
@@ -90,6 +93,9 @@ app.b.DependencyC.prototype = {
     }
 };
 
+/**
+ * @implements
+ */
 app.DependencyAImpl = function () {};
 app.DependencyAImpl.prototype = {
     evaluate: function () {

@@ -56,8 +56,7 @@ TestCase("JsuiceTestCase", {
             this.bind("app.DependencyA").to("app.DependencyAImpl");
         };
 
-        var klass = new Jsuice(global).getInjector(
-            new MyModule()).getInstance(app.ParentClass);
+        var klass = new Jsuice(global).getInjector(MyModule).getInstance(app.ParentClass);
 
         assertSame(6, klass.evaluate());
     }
